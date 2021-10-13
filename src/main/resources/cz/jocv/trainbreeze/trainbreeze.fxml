@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jocv.trainbreeze.MainController">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jocv.trainbreeze.ControllerMainWindow">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Úprava tras">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Přidej trasu" />
+                        <MenuItem fx:id="pridejTrasu" mnemonicParsing="false" onAction="#otevriDialogPridej" text="Přidej trasu" />
                         <MenuItem mnemonicParsing="false" text="Uprav trasu" />
                         <MenuItem mnemonicParsing="false" text="Odeber trasu" />
                     </items>
@@ -29,7 +29,7 @@
         </MenuBar>
     </top>
     <left>
-        <ListView prefHeight="354.0" prefWidth="190.0" BorderPane.alignment="CENTER" />
+        <ListView fx:id="listTras" prefHeight="354.0" prefWidth="190.0" BorderPane.alignment="CENTER" />
     </left>
     <center>
         <GridPane BorderPane.alignment="CENTER">
@@ -44,7 +44,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="spoctiTlacitko" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zobrazText" text="spočti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button fx:id="tlacitkoSpocti" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zobrazText" text="spočti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
