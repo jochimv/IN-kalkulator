@@ -1,4 +1,4 @@
-package cz.jocv.trainbreeze;
+package cz.jocv.trainbreeze.controller;
 
 import cz.jocv.trainbreeze.datamodel.DataSource;
 import javafx.application.Application;
