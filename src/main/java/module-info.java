@@ -6,7 +6,6 @@ module com.example.trainbreeze {
 
 
     opens cz.jocv.trainbreeze.datamodel to javafx.base;
-
     exports cz.jocv.trainbreeze.datamodel;
     opens cz.jocv.trainbreeze.view to javafx.base, javafx.fxml;
     exports cz.jocv.trainbreeze.controller;
