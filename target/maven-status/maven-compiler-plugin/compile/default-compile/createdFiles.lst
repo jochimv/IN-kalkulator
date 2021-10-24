@@ -1,3 +1,4 @@
-cz\jocv\trainbreeze\MainController.class
 cz\jocv\trainbreeze\MainWindow.class
+cz\jocv\trainbreeze\ControllerMainWindow.class
 module-info.class
+cz\jocv\trainbreeze\ControllerDialogPridej.class

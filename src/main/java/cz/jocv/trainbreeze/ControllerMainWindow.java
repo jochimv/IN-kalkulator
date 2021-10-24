@@ -1,5 +1,8 @@
 package cz.jocv.trainbreeze;
 
+import cz.jocv.trainbreeze.datamodel.Trasa;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -15,16 +18,17 @@ public class ControllerMainWindow {
     @FXML
     private TextArea vyslednyText;
     @FXML
-    private ListView listTras;
+    private TableView trasy;
     @FXML
     private MenuItem pridejTrasu;
     @FXML
     private BorderPane mainBorderPane;
 
     @FXML
-    protected void zobrazText() {
-        vyslednyText.appendText("Zkouška");
-
+    public void zobrazTrasy(){
+        Task<ObservableList<Trasa>> task = new GetAllTrasyTask();
+        trasy.itemsProperty().bind(task.valueProperty());
+        new Thread(task).start();
     }
     @FXML
     protected void otevriDialogPridej(){
@@ -36,7 +40,8 @@ public class ControllerMainWindow {
 
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("DialogPridej.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/cz/jocv/trainbreeze/view/DialogPridej.fxml"));
+
 
         try{
             dialog.getDialogPane().setContent(fxmlLoader.load());
