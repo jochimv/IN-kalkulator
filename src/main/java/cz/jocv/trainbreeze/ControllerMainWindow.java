@@ -1,5 +1,6 @@
 package cz.jocv.trainbreeze;
 
+import cz.jocv.trainbreeze.datamodel.DataSource;
 import cz.jocv.trainbreeze.datamodel.Trasa;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -10,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class ControllerMainWindow {
     @FXML
@@ -30,14 +30,29 @@ public class ControllerMainWindow {
         trasy.itemsProperty().bind(task.valueProperty());
         new Thread(task).start();
     }
+
+    @FXML
+    public void dropVsechnyTrasy(){
+        DataSource.getInstance().dropVsechnyTrasy();
+        zobrazTrasy();
+    }
+    @FXML
+    public void odeberTrasu(){
+        Trasa t = (Trasa) trasy.getSelectionModel().getSelectedItem();
+        String pocatecniStanice = t.getPocatecniStanice();
+        String cilovaStanice = t.getCilovaStanice();
+        int pocetKilometru = t.getPocetKilometru();
+        int pocetJizd = t.getPocetJizd();
+
+        DataSource.getInstance().dropTrasa(pocatecniStanice,cilovaStanice,pocetKilometru,pocetJizd);
+        zobrazTrasy();
+    }
     @FXML
     protected void otevriDialogPridej(){
         Dialog<ButtonType> dialog = new Dialog<>();
 
         Window window = dialog.getDialogPane().getScene().getWindow();
         window.setOnCloseRequest(event -> window.hide());
-
-
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/cz/jocv/trainbreeze/view/DialogPridej.fxml"));
@@ -49,7 +64,8 @@ public class ControllerMainWindow {
             e.printStackTrace();
             return;
         }
-        dialog.show();
-
+        dialog.showAndWait();
+        zobrazTrasy();
     }
+
 }

@@ -23,8 +23,8 @@
                 <Menu mnemonicParsing="false" text="Úprava tras">
                     <items>
                         <MenuItem fx:id="pridejTrasu" mnemonicParsing="false" onAction="#otevriDialogPridej" text="Přidej trasu" />
-                        <MenuItem mnemonicParsing="false" text="Uprav trasu" />
-                        <MenuItem mnemonicParsing="false" text="Odeber trasu" />
+                        <MenuItem mnemonicParsing="false" onAction="#odeberTrasu" text="Odeber trasu" />
+                        <MenuItem mnemonicParsing="false" onAction="#dropVsechnyTrasy" text="Odeber vše" />
                     </items>
                 </Menu>
             </menus>
@@ -43,7 +43,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="tlacitkoSpocti" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Spočti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button fx:id="tlacitkoSpocti" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#zobrazTrasy" text="Spočti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>

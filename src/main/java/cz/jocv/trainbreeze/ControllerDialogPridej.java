@@ -2,11 +2,16 @@ package cz.jocv.trainbreeze;
 
 import cz.jocv.trainbreeze.datamodel.DataSource;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.beans.ExceptionListener;
+import java.io.IOException;
 
 public class ControllerDialogPridej {
     @FXML
@@ -21,26 +26,36 @@ public class ControllerDialogPridej {
     private TextField kilometryField;
 
 
-
     @FXML
-    private void zpracujVysledky(){
-        System.out.println("Zpracovávám výsledky");
-        String pocatedniStanice = pocatecniField.getText();
+    private void zpracujVysledky() {
+        String pocatecniStanice = pocatecniField.getText();
         String cilovaStanice = cilovyField.getText();
         int kilometry;
-        try{
+        int pocetJizd = jizdySpinner.getValue();
+
+        if (pocatecniStanice.equals("") || cilovaStanice.equals("")){
+            closeWindow();
+            return;
+        }
+
+        try {
             String kilometryText = kilometryField.getText();
             kilometry = Integer.parseInt(kilometryText);
 
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
+            closeWindow();
             return;
         }
-        int pocetJizd = jizdySpinner.getValue();
 
-        DataSource.getInstance().insertTrasa(pocatedniStanice,cilovaStanice,kilometry,pocetJizd);
+        DataSource.getInstance().insertTrasa(pocatecniStanice, cilovaStanice, kilometry, pocetJizd);
+
+        closeWindow();
+
+
+    }
+
+    private void closeWindow() {
         Stage stage = (Stage) pridejButton.getScene().getWindow();
         stage.close();
-
-        F
     }
 }

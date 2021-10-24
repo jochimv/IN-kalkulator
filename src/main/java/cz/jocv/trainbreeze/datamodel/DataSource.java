@@ -1,5 +1,7 @@
 package cz.jocv.trainbreeze.datamodel;
 
+import javafx.fxml.FXML;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +59,37 @@ public class DataSource {
         }
     }
 
+    public void dropTrasa(String pocatecniStanice, String cilovaStanice, int pocetKilometru, int pocetJizd){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM trasy WHERE pocatecni_stanice =? AND cilova_stanice =? AND pocet_kilometru =? AND pocet_jizd = ?");
+            preparedStatement.setString(1, pocatecniStanice);
+            preparedStatement.setString(2, cilovaStanice);
+            preparedStatement.setInt(3, pocetKilometru);
+            preparedStatement.setInt(4, pocetJizd);
+
+            int affectedRows = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Could not delete a record: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    public void dropVsechnyTrasy(){
+        try{
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM trasy WHERE 1=1");
+            statement.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println("problem droppint the tables:" + e.getMessage());
+        }
+    }
+
+    @FXML
     public void insertTrasa(String pocatecniStanice, String cilovaStanice, int pocetKilometru, int pocetJizd) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO trasy (pocatecni_stanice,cilova_stanice,pocet_jizd,pocet_kilometru) VALUES(?,?,?,?);");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO trasy (pocatecni_stanice,cilova_stanice,pocet_kilometru,pocet_jizd) VALUES(?,?,?,?);");
             preparedStatement.setString(1, pocatecniStanice);
             preparedStatement.setString(2, cilovaStanice);
             preparedStatement.setInt(3, pocetKilometru);
