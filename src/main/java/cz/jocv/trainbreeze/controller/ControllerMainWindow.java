@@ -77,7 +77,7 @@ public class ControllerMainWindow {
         ObservableList<Trasa> t = getAllTrasyTask.call();
         List<Trasa> trasy = new ArrayList<>(t);
         InKarta nejlepsi = Engine.getInstance().spoctiVysledek(trasy);
-        String text = "- cena jízdného za rok: " + Engine.getRocne() + "Kč\n- nejlepší karta: " + nejlepsi.getTyp() + "\n- úspora: " + nejlepsi.getPenezinaUspora() + "Kč";
+        String text = "- cena jízdného za rok: " + Engine.getRocne() + "Kč\n- nejlepší karta: " + nejlepsi.getTyp() + "\n- cena " + nejlepsi.getTyp() + " za rok: " + nejlepsi.getCenaZaRok() + "Kč\n- úspora v čistém: " + nejlepsi.getPenezinaUspora() + "Kč\n- nová cena s " + nejlepsi.getTyp() + ": " + (Engine.getRocne() - nejlepsi.getPenezinaUspora()) + "Kč";
         vyslednyText.appendText(text);
 
     }
