@@ -8,7 +8,7 @@ import javafx.concurrent.Task;
 
 public class GetAllTrasyTask extends Task {
     @Override
-    protected ObservableList<Trasa> call() throws Exception {
+    protected ObservableList<Trasa> call() {
         return FXCollections.observableArrayList(DataSource.getInstance().queryTrasy());
     }
 }

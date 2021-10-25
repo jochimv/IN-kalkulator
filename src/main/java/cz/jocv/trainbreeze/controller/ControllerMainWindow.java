@@ -1,6 +1,7 @@
 package cz.jocv.trainbreeze.controller;
 
 import cz.jocv.trainbreeze.datamodel.DataSource;
+import cz.jocv.trainbreeze.datamodel.InKarta;
 import cz.jocv.trainbreeze.datamodel.Trasa;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -11,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerMainWindow {
     @FXML
@@ -57,7 +60,6 @@ public class ControllerMainWindow {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/cz/jocv/trainbreeze/view/DialogPridej.fxml"));
 
-
         try{
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
@@ -66,6 +68,18 @@ public class ControllerMainWindow {
         }
         dialog.showAndWait();
         zobrazTrasy();
+    }
+
+    @FXML
+    public void vypocitejKartu(){
+        vyslednyText.clear();
+        GetAllTrasyTask getAllTrasyTask = new GetAllTrasyTask();
+        ObservableList<Trasa> t = getAllTrasyTask.call();
+        List<Trasa> trasy = new ArrayList<>(t);
+        InKarta nejlepsi = Engine.getInstance().spoctiVysledek(trasy);
+        String text = "- cena jízdného za rok: " + Engine.getRocne() + "Kč\n- nejlepší karta: " + nejlepsi.getTyp() + "\n- úspora: " + nejlepsi.getPenezinaUspora() + "Kč";
+        vyslednyText.appendText(text);
+
     }
 
 }
